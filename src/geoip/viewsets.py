@@ -14,7 +14,7 @@ class IPInfoViewset(viewsets.ModelViewSet):
     def list(self, request):
         data = {"help": [
             "Look up an IP with https://data.pengra.io/geoip/{IP_ADDR}/",
-            "Check out the docs @ https://pengra.github.io/data/geoip/"
+            "Check out the docs @ https://pengra.github.io/data/geoip"
         ]}
         return response.Response(data=data, status=404)
 
