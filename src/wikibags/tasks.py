@@ -66,7 +66,9 @@ def create_wikiarticle(wiki_id):
             wikiarticle.save()
         except IntegrityError:
             raise IntegrityError(wiki_id)
-        return wikiarticle
+        if wiki_id.isdigit():
+            return wikiarticle
+        raise IntegrityError(wiki_id)
     else:
         raise ValueError("Invalid response:", response.status)
         
