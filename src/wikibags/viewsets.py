@@ -25,6 +25,8 @@ class WikiArticleViewset(viewsets.ModelViewSet):
             wiki = get_or_create_wikiarticle(wiki_id)
         except ValueError as e:
             return response.Response(data=str(e), status=500)
+        except IndexError as e:
+            return response.Response(status=404)
         except IntegrityError as e:
             return redirect("wikiarticle-detail", wiki_id=e.args[0])
 
