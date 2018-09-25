@@ -48,6 +48,7 @@ PREREQS = [
 
 MYAPPS = [
     'geoip',
+    'wikibags',
 ]
 
 INSTALLED_APPS = [*PREREQS, *MYAPPS]
