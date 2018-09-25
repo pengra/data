@@ -3,6 +3,9 @@ from wikibags.serializers import WikiArticleSerializer
 from wikibags.models import WikiArticle
 from wikibags.tasks import get_or_create_wikiarticle
 
+from django.db.utils import IntegrityError
+from django.shortcuts import redirect
+
 class WikiArticleViewset(viewsets.ModelViewSet):
     queryset = WikiArticle.objects.all()
     serializer_class = WikiArticleSerializer
@@ -22,6 +25,8 @@ class WikiArticleViewset(viewsets.ModelViewSet):
             wiki = get_or_create_wikiarticle(wiki_id)
         except ValueError as e:
             return response.Response(data=str(e), status=500)
+        except IntegrityError as e:
+            return redirect("wikiarticle-detail", wiki_id=e.args[0])
 
         serializer = self.serializer_class(wiki)
         return response.Response(serializer.data)

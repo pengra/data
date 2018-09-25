@@ -65,7 +65,7 @@ def create_wikiarticle(wiki_id):
         try:
             wikiarticle.save()
         except IntegrityError:
-            raise ValueError("Try pageid: " + str(wiki_id))
+            raise IntegrityError(wiki_id)
         return wikiarticle
     else:
         raise ValueError("Invalid response:", response.status)
@@ -74,8 +74,11 @@ def create_wikiarticle(wiki_id):
 def get_or_create_wikiarticle(wiki_id):
     if wiki_id.isdigit():
         wikis = WikiArticle.objects.filter(wiki_id=wiki_id)
+        if wikis.exists():
+            return wikis[0]
     else:
         wikis = WikiArticle.objects.filter(page=wiki_id.lower())
-    if wikis.exists():
-        return wikis[0]
+        if wikis.exists():
+            raise IntegrityError(wikis[0].wiki_id)
+    
     return create_wikiarticle(wiki_id)
