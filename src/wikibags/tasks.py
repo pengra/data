@@ -33,8 +33,10 @@ def get_article_tokens(data):
 def create_wikiarticle(wiki_id):
     if wiki_id.isdigit():
         response = requests.get(ENDPOINT.format(wiki_id=wiki_id, key="pageid"))
+        redirect = False
     else:
         response = requests.get(ENDPOINT.format(wiki_id=wiki_id, key="page"))
+        redirect = True
     if response.ok:
         data = response.json()
         wiki_id = data['parse']['pageid']
@@ -66,7 +68,7 @@ def create_wikiarticle(wiki_id):
             wikiarticle.save()
         except IntegrityError:
             raise IntegrityError(wiki_id)
-        if wiki_id.isdigit():
+        if not redirect:
             return wikiarticle
         raise IntegrityError(wiki_id)
     else:
