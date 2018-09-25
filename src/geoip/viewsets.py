@@ -16,7 +16,7 @@ class IPInfoViewset(viewsets.ModelViewSet):
             "Look up an IP with https://data.pengra.io/geoip/{IP_ADDR}/",
             "Check out the docs @ https://pengra.github.io/data/geoip"
         ]}
-        return response.Response(data=data, status=404)
+        return response.Response(data=data, status=200)
 
     def retrieve(self, request, IP=None):
         "Grab IPInfo if it doesn't exist."
