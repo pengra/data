@@ -39,6 +39,8 @@ def create_wikiarticle(wiki_id):
         redirect = True
     if response.ok:
         data = response.json()
+        if 'error' in data:
+            raise ValueError("Not Found", response.json()['error'])
         wiki_id = data['parse']['pageid']
         title = data['parse']['title']
         page = data['parse']['sections'][0]['fromtitle']
