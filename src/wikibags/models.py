@@ -6,6 +6,7 @@ from django.contrib.postgres.fields import JSONField
 class WikiArticle(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     wiki_id = models.IntegerField(unique=True)
+    page = models.CharField(unique=True, max_length=255)
     title = models.CharField(unique=True, max_length=255)
     bag_size = models.IntegerField()
     bag = JSONField()

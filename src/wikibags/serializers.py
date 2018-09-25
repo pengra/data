@@ -9,6 +9,7 @@ class WikiArticleSerializer(serializers.ModelSerializer):
         lookup_field = 'wiki_id'
         fields = [
             'updated_at',
+            'page',
             'wiki_id',
             'title',
             'header_bag_size',

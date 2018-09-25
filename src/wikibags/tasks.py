@@ -6,7 +6,10 @@ from bs4 import BeautifulSoup
 import re
 from nltk.tokenize.nist import NISTTokenizer
 
-ENDPOINT = "https://en.wikipedia.org/w/api.php?action=parse&pageid={wiki_id}&format=json"
+from django.db.utils import IntegrityError
+
+ENDPOINT = "https://en.wikipedia.org/w/api.php?action=parse&{key}={wiki_id}&format=json"
+
 NIST = NISTTokenizer()
 
 def get_article_tokens(data):
@@ -28,10 +31,15 @@ def get_article_tokens(data):
                 yield (tag.name, token)
 
 def create_wikiarticle(wiki_id):
-    response = requests.get(ENDPOINT.format(wiki_id=wiki_id))
+    if wiki_id.isdigit():
+        response = requests.get(ENDPOINT.format(wiki_id=wiki_id, key="pageid"))
+    else:
+        response = requests.get(ENDPOINT.format(wiki_id=wiki_id, key="page"))
     if response.ok:
         data = response.json()
+        wiki_id = data['parse']['pageid']
         title = data['parse']['title']
+        page = data['parse']['sections'][0]['fromtitle']
         bag = {}
         bag_size = 0
         header_bag = {}
@@ -45,21 +53,29 @@ def create_wikiarticle(wiki_id):
                 header_bag_size += 1
                 header_bag.setdefault(token, 0)
                 header_bag[token] += 1
-        wikiarticle = WikiArticle.objects.create(
+        wikiarticle = WikiArticle(
             wiki_id=wiki_id,
             title=title,
+            page=page.lower(),
             bag_size=bag_size,
             bag=bag,
             header_bag_size=header_bag_size,
             header_bag=header_bag
         )
+        try:
+            wikiarticle.save()
+        except IntegrityError:
+            raise ValueError("Try pageid: " + str(wiki_id))
         return wikiarticle
     else:
         raise ValueError("Invalid response:", response.status)
         
 
 def get_or_create_wikiarticle(wiki_id):
-    wikis = WikiArticle.objects.filter(wiki_id=wiki_id)
+    if wiki_id.isdigit():
+        wikis = WikiArticle.objects.filter(wiki_id=wiki_id)
+    else:
+        wikis = WikiArticle.objects.filter(page=wiki_id.lower())
     if wikis.exists():
         return wikis[0]
     return create_wikiarticle(wiki_id)
