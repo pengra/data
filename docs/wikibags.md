@@ -27,3 +27,16 @@ All requests using `page` will be redirected to its `wiki_id` equivalent.
 
 ## Data Source:
 [Wikipedia API](https://en.wikipedia.org/w/api.php?action=parse&pageid=&format=json) provides the initial data, and then it is cached permanently.
+
+## Rapid Spawning:
+Since cached wikibags are returned faster, running this script helps response times:
+
+```py
+def query_wiki(wiki_id):
+    response = requests.get("https://data.pengra.io/wikibags/{}/".format(wiki_id))
+    return response.json()['bag']
+
+def get_random_articles(limit):
+    response = requests.get("https://en.wikipedia.org/w/api.php?action=query&list=random&rnlimit={limit}&rnnamespace=0&format=json".format(limit=limit))
+    return [random['id'] for random in response.json()['query']['random']]
+```
