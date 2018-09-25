@@ -12,4 +12,7 @@ Open source datasets. Used for various experiments and hackathons.
 <tr>
     <td>geoip</td><td><a href="https://data.pengra.io/geoip/">https://data.pengra.io/geoip/</a></td><td><a href="https://pengra.github.io/data/geoip">https://pengra.github.io/data/geoip</a></td>
 </tr>
+<tr>
+    <td>wikibags</td><td><a href="https://data.pengra.io/wikibags/">https://data.pengra.io/wikibags/</a></td><td><a href="https://pengra.github.io/data/wikibags">https://pengra.github.io/data/wikibags</a></td>
+</tr>
 </table>
