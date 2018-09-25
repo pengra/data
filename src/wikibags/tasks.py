@@ -24,7 +24,7 @@ def get_article_tokens(data):
     for tag in text_tags:
         
         text = tag.get_text(separator=' ')
-        text = re.sub(r"\[[\ ]{0,}[0-9|edit]{1,}[\ ]{0,}\]", "", text)
+        text = re.sub(r"\[[\ ]{0,}[0-9|edit|citation needed]{1,}[\ ]{0,}\]", "", text)
         tokens = NIST.tokenize(text, lowercase=True)
         for token in tokens:
             if token:
@@ -41,9 +41,12 @@ def create_wikiarticle(wiki_id):
         data = response.json()
         if 'error' in data:
             raise ValueError("Not Found", response.json()['error'])
-        wiki_id = data['parse']['pageid']
-        title = data['parse']['title']
-        page = data['parse']['sections'][0]['fromtitle']
+        try:
+            wiki_id = data['parse']['pageid']
+            title = data['parse']['title']
+            page = data['parse']['sections'][0]['fromtitle']
+        except KeyError:
+            raise ValueError("Wiki API in unexpected format")
         bag = {}
         bag_size = 0
         header_bag = {}
