@@ -21,6 +21,8 @@ class WikiArticleViewset(viewsets.ModelViewSet):
 
     def retrieve(self, request, wiki_id=None):
         "Grab WikiArticles if it doesn't exist."
+        if wiki_id == "_random":
+            return redirect("wikiarticle-detail", wiki_id=WikiArticle.objects.order_by('?').first().wiki_id)
         try:
             wiki = get_or_create_wikiarticle(wiki_id)
         except ValueError as e:

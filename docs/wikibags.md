@@ -25,6 +25,9 @@ Responses will always be in JSON in the following format:
 
 All requests using `page` will be redirected to its `wiki_id` equivalent.
 
+## Random Page
+Random wikibags (already cached) can be achieved with [https://data.pengra.io/wikibags/_random/](https://data.pengra.io/wikibags/_random/).
+
 ## Data Source:
 [Wikipedia API](https://en.wikipedia.org/w/api.php?action=parse&pageid=&format=json) provides the initial data, and then it is cached permanently.
 
