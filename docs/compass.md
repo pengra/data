@@ -4,9 +4,50 @@
 This is an API that hosts the dataset of Broward County
 
 ## Notable Lab
-I wrote a lab about this dataset: [Naturally Occurring Racial Bias in AIs](https://pengra.github.io/labs/compass_analysis)
+I wrote a lab about this dataset: [Naturally Occurring Racial Bias in AIs](https://pengra.github.io/labs/compass_analysis). The API has changed a lot since this writing.
 
-## Response Format
+## Filtering
+
+### By ethnicity
+`inmate_ethnicity` will be one of the following values:
+- african-american
+- asian
+- caucasian
+- hispanic
+- native-american
+- other
+You can filter the result by ethnicity by appending `?inmate__ethnicity=<ethnicity>`.
+
+### By gender
+`inmate_sex` will be one of the following values:
+- male
+- female
+You can filter the result by ethnicity by appending `?inmate__sex=<sex>`
+
+### By score
+`violence_score`, `recidivism_score` and `fail_to_appear_score` is a nullable rating from 1-10.
+Each score is filterable. For instance, you can filter the result by violence risk by append `?violence_score=<score>`.
+
+### By language
+`inmate_language` will be either `english` or `spanish`.
+You can filter the result by language by appending `?inmate__language=<language>`
+
+### By type
+`type` will either be `new` or `copy`.
+You can filter the result by type by appending `?type=<type>`
+
+#### Examples:
+- [African American males with a `violence_score` of 10](https://data.pengra.io/compas/?inmate__ethnicity=african-american&inmate__sex=male&violence_score=10)
+- [Caucasians males with a `violence_score` of 10](https://data.pengra.io/compas/?inmate__ethnicity=caucasian&inmate__sex=male&violence_score=10)
+
+## Response Data
+Each query will return a dictionary with at least 3 of the 4 keys:
+- `next` - Results are paginated, so this links to the next page of results
+- `previous` - as mentioned, results are paginated, so this links to the previous page of results
+- `meta` - This dictionary contains demographic, gender and scoring meta data that summarizes the results
+- `results` - An array containing this page's results.
+
+### Results Format
 Use curl or requests to hit [https://data.pengra.io/compas/](https://data.pengra.io/compas/). 
 The results will be split into pages with 100 items per page. Results will appear in the following format:
 ```json
@@ -37,6 +78,7 @@ The results will be split into pages with 100 items per page. Results will appea
     "... and thousands more ..."
 ]
 ```
+To grab an individual assessment, use `https://data.pengra.io/compas/<assessment_id>`.
 
 ## Data Source:
-Freedom of Information Act let me obtain a CSV containing these values. I simply converted it to an API for future use.
+Freedom of Information Act let me obtain a CSV containing these values. I simply converted it to an API for future use. Some data had to be cleaned before becoming an API endpoint.

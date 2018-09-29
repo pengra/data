@@ -11,13 +11,23 @@ class Inmate(models.Model):
         ("male", "Male"),
         ("female", "Female")
     ))
-    ethnicity = models.CharField(max_length=50)
+    ethnicity = models.CharField(max_length=16, choices=(
+        ('african-american', 'African American'),
+        ('asian', 'Asian'),
+        ('caucasian', 'Caucasian'),
+        ('hispanic', 'Hispanic'),
+        ('native-american', 'Native American'),
+        ('other', 'Other')
+    ))
     dob = models.DateField()
     
     legal_status = models.CharField(max_length=50)
     custody_status = models.CharField(max_length=50)
     marital_status = models.CharField(max_length=50)
-    language = models.CharField(max_length=50)
+    language = models.CharField(max_length=7, choices=(
+        ('english', 'English'),
+        ('spanish', 'Spanish')
+    ))
 
 
 class Assessment(models.Model):
@@ -37,7 +47,7 @@ class Assessment(models.Model):
     fail_to_appear_score_raw = models.FloatField(null=True)
     fail_to_appear_score = models.IntegerField(null=True)
 
-    type = models.CharField(max_length=50)
+    type = models.CharField(max_length=4, choices=(('new', 'New'), ('copy', 'Copy')))
     reason = models.CharField(max_length=50)
 
     @property
