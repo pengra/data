@@ -1,7 +1,7 @@
 # Data
 // Written on **September 23rd, 2018**
 
-Open source datasets. Used for various experiments and hackathons.
+Open source datasets. Used for various experiments and hackathons. API is down usually between 11pm and 5am because the server is loud and I want to sleep.
 
 ## Datasets:
 
@@ -14,5 +14,8 @@ Open source datasets. Used for various experiments and hackathons.
 </tr>
 <tr>
     <td>wikibags</td><td><a href="https://data.pengra.io/wikibags/">https://data.pengra.io/wikibags/</a></td><td><a href="https://pengra.github.io/data/wikibags">https://pengra.github.io/data/wikibags</a></td>
+</tr>
+<tr>
+    <td>compas</td><td><a href="https://data.pengra.io/compas/">https://data.pengra.io/compas/</a></td><td><a href="https://pengra.github.io/data/compass">https://pengra.github.io/data/compass</a></td>
 </tr>
 </table>
