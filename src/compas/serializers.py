@@ -32,8 +32,10 @@ class AssessmentSerializers(serializers.ModelSerializer):
             'supervision_level',
             'supervision_level_text',
             'violence_score',
+            'violence_score_text',
             'recidivism_score',
+            'recidivism_score_text',
             'fail_to_appear_score',
-            'supervision_level_text',
+            'fail_to_appear_score_text',
             'type',
         ]

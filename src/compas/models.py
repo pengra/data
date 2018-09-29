@@ -41,15 +41,42 @@ class Assessment(models.Model):
     reason = models.CharField(max_length=50)
 
     @property
+    def violence_score_text(self):
+        if self.violence_score <= 4:
+            return "low"
+        elif self.violence_score <= 7:
+            return "medium"
+        elif self.violence_score <= 10:
+            return "high"
+
+    @property
+    def recidivism_score_text(self):
+        if self.recidivism_score <= 4:
+            return "low"
+        elif self.recidivism_score <= 7:
+            return "medium"
+        elif self.recidivism_score <= 10:
+            return "high"
+
+    @property
+    def fail_to_appear_score_text(self):
+        if self.fail_to_appear_score <= 4:
+            return "low"
+        elif self.fail_to_appear_score <= 7:
+            return "medium"
+        elif self.fail_to_appear_score <= 10:
+            return "high"
+
+    @property
     def supervision_level_text(self):
         if self.supervision_level == 1:
-            return "Low"
+            return "low"
         elif self.supervision_level == 2:
-            return "Medium"
+            return "medium"
         elif self.supervision_level == 3:
-            return "Medium with Override Consideration"
+            return "medium with override consideration"
         elif self.supervision_level == 4:
-            return "High"
+            return "high"
         raise ValueError("Unknown Value: {}".format(self.supervision_level))
 
 
