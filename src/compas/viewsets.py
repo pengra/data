@@ -7,6 +7,10 @@ class Pagination(pagination.PageNumberPagination):
     max_page_size = 1000
 
 class AssessmentViewset(viewsets.ModelViewSet):
+    """
+    If you'd like more details on the inmates (like name, address, etc) email me @ nortonjp@uw.edu.
+    Also, these values were true as of 2015. These might not be true as of today.
+    """
     queryset = Assessment.objects.all()
     serializer_class = AssessmentSerializers
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
