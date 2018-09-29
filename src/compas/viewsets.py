@@ -7,7 +7,7 @@ class AssessmentViewset(viewsets.ModelViewSet):
     queryset = Assessment.objects.all()
     serializer_class = AssessmentSerializers
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    pagination_class = pagination.LimitOffsetPagination
+    pagination_class = pagination.PageNumberPagination
     page_size = 100
     lookup_field = 'assessment_id'
     search_fields = [
