@@ -1,7 +1,6 @@
 from rest_framework import viewsets, permissions
 from compas.models import Assessment
 from compas.serializers import AssessmentSerializers
-from django_filters import rest_framework as filters
 
 
 class AssessmentViewset(viewsets.ModelViewSet):
