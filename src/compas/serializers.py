@@ -5,7 +5,7 @@ from compas.models import Assessment
 class AssessmentSerializers(serializers.ModelSerializer):
     supervision_level_text = serializers.CharField(read_only=True)
     inmate_id = serializers.IntegerField(source='inmate.person_id', read_only=True)
-    inmate_sex = serializers.IntegerField(source='inmate.sex', read_only=True)
+    inmate_sex = serializers.CharField(source='inmate.sex', read_only=True)
     inmate_ethnicity = serializers.CharField(source='inmate.ethnicity', read_only=True)
     inmate_dob = serializers.CharField(source='inmate.dob', read_only=True)
     inmate_legal_status = serializers.CharField(source='inmate.legal_status', read_only=True)
