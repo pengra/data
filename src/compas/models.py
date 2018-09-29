@@ -36,8 +36,8 @@ class Assessment(models.Model):
     recidivism_score_raw = models.FloatField()
     recidivism_score = models.IntegerField()
 
-    violence_score_raw = models.FloatField()
-    violence_score = models.IntegerField()
+    fail_to_appear_score_raw = models.FloatField()
+    fail_to_appear_score = models.IntegerField()
 
     type = models.CharField(max_length=50)
     
