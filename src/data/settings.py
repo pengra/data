@@ -44,6 +44,7 @@ PREREQS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django-filters',
 ]
 
 MYAPPS = [
