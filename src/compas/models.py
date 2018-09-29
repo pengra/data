@@ -24,7 +24,7 @@ class Assessment(models.Model):
     inmate = models.ForeignKey(Inmate, on_delete=models.CASCADE, related_name="assessments")
     date = models.DateField()
     case_id = models.IntegerField()
-    assessment_id = models.IntegerField()
+    assessment_id = models.IntegerField(unique=True)
     agency_text = models.CharField(max_length=255)
     supervision_level = models.IntegerField()
 
