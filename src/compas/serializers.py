@@ -29,6 +29,7 @@ class AssessmentSerializers(serializers.ModelSerializer):
             'case_id',
             'assessment_id',
             'agency_text',
+            'supervision_level',
             'supervision_level_text',
             'violence_score',
             'recidivism_score',
