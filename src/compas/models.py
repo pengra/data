@@ -42,30 +42,33 @@ class Assessment(models.Model):
 
     @property
     def violence_score_text(self):
-        if self.violence_score <= 4:
-            return "low"
-        elif self.violence_score <= 7:
-            return "medium"
-        elif self.violence_score <= 10:
-            return "high"
+        if self.violence_score:
+            if self.violence_score <= 4:
+                return "low"
+            elif self.violence_score <= 7:
+                return "medium"
+            elif self.violence_score <= 10:
+                return "high"
 
     @property
     def recidivism_score_text(self):
-        if self.recidivism_score <= 4:
-            return "low"
-        elif self.recidivism_score <= 7:
-            return "medium"
-        elif self.recidivism_score <= 10:
-            return "high"
+        if self.recidivism_score:
+            if self.recidivism_score <= 4:
+                return "low"
+            elif self.recidivism_score <= 7:
+                return "medium"
+            elif self.recidivism_score <= 10:
+                return "high"
 
     @property
     def fail_to_appear_score_text(self):
-        if self.fail_to_appear_score <= 4:
-            return "low"
-        elif self.fail_to_appear_score <= 7:
-            return "medium"
-        elif self.fail_to_appear_score <= 10:
-            return "high"
+        if self.fail_to_appear_score:
+            if self.fail_to_appear_score <= 4:
+                return "low"
+            elif self.fail_to_appear_score <= 7:
+                return "medium"
+            elif self.fail_to_appear_score <= 10:
+                return "high"
 
     @property
     def supervision_level_text(self):
