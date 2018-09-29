@@ -20,8 +20,6 @@ class Inmate(models.Model):
     language = models.CharField(max_length=50)
 
 
-
-
 class Assessment(models.Model):
     inmate = models.ForeignKey(Inmate, on_delete=models.CASCADE, related_name="assessments")
     date = models.DateField()
@@ -30,17 +28,17 @@ class Assessment(models.Model):
     agency_text = models.CharField(max_length=255)
     supervision_level = models.IntegerField()
 
-    violence_score_raw = models.FloatField()
-    violence_score = models.IntegerField()
+    violence_score_raw = models.FloatField(null=True)
+    violence_score = models.IntegerField(null=True)
 
-    recidivism_score_raw = models.FloatField()
-    recidivism_score = models.IntegerField()
+    recidivism_score_raw = models.FloatField(null=True)
+    recidivism_score = models.IntegerField(null=True)
 
-    fail_to_appear_score_raw = models.FloatField()
-    fail_to_appear_score = models.IntegerField()
+    fail_to_appear_score_raw = models.FloatField(null=True)
+    fail_to_appear_score = models.IntegerField(null=True)
 
     type = models.CharField(max_length=50)
-    
+    reason = models.CharField(max_length=50)
 
     @property
     def supervision_level_text(self):
