@@ -1,19 +1,53 @@
 from rest_framework import serializers
-from wordindex.models import WordIndex
+from wordindex.models import WordIndex, Word
+
 
 class WordIndexSerializer(serializers.ModelSerializer):
-    wordPercentage = serializers.FloatField(read_only=True)
-    articleAppearancePercentage = serializers.FloatField(read_only=True)
-    isStopWord = serializers.BooleanField(read_only=True)
+    url = serializers.CharField(source="url.url")
     class Meta:
         model = WordIndex
         fields = [
-            'updated_at',
             'url',
+            'count',
+        ]
+
+
+class WordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Word
+        fields = [
             'word',
             'count',
-            'wordPercentage',
-            'articleAppearancePercentage',
-            'isStopWord',
+            'isAlnum',
         ]
-        
+
+class WordDetailSerializer(WordSerializer):
+    indexes = WordIndexSerializer(source="wordindex_set", many=True, read_only=True)
+    wordDensity = serializers.FloatField(read_only=True)
+    articleDensity = serializers.FloatField(read_only=True)
+    isStopWord = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = Word
+        fields = [
+            'word',
+            'count',
+            'isAlnum',
+            'wordDensity',
+            'isStopWord',
+            'articleDensity',
+            'indexes',
+        ]
+
+class LargeIndexSetWordDetailSerializer(WordDetailSerializer):
+    indexes = None
+    class Meta:
+        model = Word
+        fields = [
+            'word',
+            'count',
+            'isAlnum',
+            'wordDensity',
+            'isStopWord',
+            'articleDensity',
+        ]

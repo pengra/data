@@ -1,4 +1,5 @@
 from wikibags.models import WikiArticle
+from wordindex.tasks import populate_from_bag
 
 import requests
 from bs4 import BeautifulSoup
@@ -9,6 +10,7 @@ from nltk.tokenize.nist import NISTTokenizer
 from django.db.utils import IntegrityError
 
 ENDPOINT = "https://en.wikipedia.org/w/api.php?action=parse&{key}={wiki_id}&format=json"
+WIKI_PAGE = "https://en.wikipedia.org/wiki/{name}/"
 
 NIST = NISTTokenizer()
 
@@ -71,6 +73,7 @@ def create_wikiarticle(wiki_id):
         )
         try:
             wikiarticle.save()
+            populate_from_bag(bag, WIKI_PAGE.format(name=page))
         except IntegrityError:
             raise IntegrityError(wiki_id)
         if not redirect:

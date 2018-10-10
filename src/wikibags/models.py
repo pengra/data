@@ -14,6 +14,10 @@ class WikiArticle(models.Model):
     header_bag = JSONField()
 
     @property
+    def link(self):
+        return "https://en.wikipedia.org/wiki/{name}/".format(name=self.page)
+
+    @property
     def sorted_bag(self):
         return {key: value for key, value in sorted(self.bag.items(), key=lambda x: -x[1])}
 
