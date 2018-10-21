@@ -1,5 +1,4 @@
 # Data
-// Written on **September 23rd, 2018**
 
 Open source datasets. Used for various experiments and hackathons. API is down usually between 11pm and 5am because the server is loud and I want to sleep.
 
@@ -17,5 +16,8 @@ Open source datasets. Used for various experiments and hackathons. API is down u
 </tr>
 <tr>
     <td>compas</td><td><a href="https://data.pengra.io/compas/">https://data.pengra.io/compas/</a></td><td><a href="https://pengra.github.io/data/compass">https://pengra.github.io/data/compass</a></td>
+</tr>
+<tr>
+    <td>wordindex</td><td><a href="https://data.pengra.io/wordindex/">https://data.pengra.io/wordindex/</a></td><td><a href="https://pengra.github.io/data/wordindex">https://pengra.github.io/data/wordindex</a></td>
 </tr>
 </table>
