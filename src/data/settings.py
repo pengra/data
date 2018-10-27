@@ -52,6 +52,7 @@ MYAPPS = [
     'wikibags',
     'compas',
     'wordindex',
+    'state_gis',
 ]
 
 INSTALLED_APPS = [*PREREQS, *MYAPPS]
