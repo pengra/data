@@ -2,7 +2,7 @@ from rest_framework import viewsets, permissions, pagination, response
 from django_filters.rest_framework import DjangoFilterBackend
 
 from state_gis.serializers import StateSerializer
-from stage_gis.models import State
+from state_gis.models import State
 
 
 class StateViewset(viewsets.ModelViewSet):
